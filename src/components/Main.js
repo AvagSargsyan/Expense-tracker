@@ -1,4 +1,4 @@
-export default function Main({ calculations }) {
+export default function Main({ currentValues }) {
 
   return (
     <main>
@@ -8,7 +8,7 @@ export default function Main({ calculations }) {
         <div className="balance">
           <h2>Your balance</h2>
           <div className="balance-amount">
-            ${calculations.income - calculations.expence}
+            ${currentValues.income - currentValues.expence}
           </div>
         </div>
 
@@ -16,13 +16,13 @@ export default function Main({ calculations }) {
           <div className="income">
             <h3>income</h3>
             <div className="income-amount">
-              ${calculations.income}
+              ${currentValues.income}
             </div>
           </div>
           <div className="expence">
             <h3>expence</h3>
             <div className="income-amount">
-              ${calculations.expence}
+              ${currentValues.expence}
             </div>
           </div>
         </div>
