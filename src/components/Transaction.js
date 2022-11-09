@@ -2,9 +2,9 @@ export default function Transaction({ transaction }) {
   return (
     <div className="transaction">
       <span className="title">{transaction.title}</span>
-      <span className="value">
+      <span className="amount">
         {transaction.positive ? '+' : '-'}
-        {transaction.value}
+        {transaction.amount}
       </span>
     </div>
   );

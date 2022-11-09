@@ -1,3 +1,4 @@
+import AddTransaction from "./components/AddTransaction";
 import History from "./components/History";
 import Main from "./components/Main";
 
@@ -7,13 +8,13 @@ function App() {
     {
       id: 1,
       title: 'Bought a phone',
-      value: 999,
+      amount: 999,
       positive: true
     },
     {
       id: 2,
       title: 'Got salary',
-      value: 2000,
+      amount: 2000,
       positive: true
     }
   ]
@@ -22,6 +23,7 @@ function App() {
     <div className="App">
       <Main />
       <History transactions={transactions} />
+      <AddTransaction />
     </div>
   );
 }
