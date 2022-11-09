@@ -1,8 +1,8 @@
 import Transaction from './Transaction';
 
-export default function History({ transactions }) {
+export default function History({ transactions, onDelete }) {
   const list = transactions.length !== 0 ? transactions.map((transaction) => (
-    <Transaction transaction={transaction} key={transaction.id} />
+    <Transaction transaction={transaction} key={transaction.id} onDelete={onDelete} />
   )) : 'No transactions yet.'
 
   return (

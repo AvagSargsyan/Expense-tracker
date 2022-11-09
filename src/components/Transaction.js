@@ -1,7 +1,6 @@
-export default function Transaction({ transaction }) {
-
+export default function Transaction({ transaction, onDelete }) {
   const styles = {
-    color: transaction.positive ? 'rgb(11, 168, 103)' : 'rgb(182, 45, 45)'
+    color: transaction.positive ? 'rgb(11, 168, 103)' : 'rgb(182, 45, 45)',
   };
 
   return (
@@ -11,6 +10,12 @@ export default function Transaction({ transaction }) {
         {transaction.positive ? '+' : '-'}
         {transaction.amount}
       </span>
+      <button
+        className="delete-transaction"
+        onClick={() => onDelete(transaction.id)}
+      >
+        X
+      </button>
     </div>
   );
 }

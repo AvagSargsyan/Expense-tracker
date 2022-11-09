@@ -25,10 +25,16 @@ function App() {
     });
   }
 
+  function onDeleteTransaction(id) {
+    setTransactions((prevTransactions) =>
+      prevTransactions.filter((tr) => tr.id !== id)
+    );
+  }
+
   return (
     <div className="App">
       <Main currentValues={currentValues} />
-      <History transactions={transactions} />
+      <History transactions={transactions} onDelete={onDeleteTransaction} />
       <AddTransaction
         onAdd={onAddTransaction}
         balance={currentValues.income - currentValues.expence}
