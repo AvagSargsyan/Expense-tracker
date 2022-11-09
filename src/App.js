@@ -4,20 +4,7 @@ import History from './components/History';
 import Main from './components/Main';
 
 function App() {
-  const [transactions, setTransactions] = useState([
-    // {
-    //   id: 1,
-    //   title: 'Got salary',
-    //   amount: 2000,
-    //   positive: true,
-    // },
-    // {
-    //   id: 2,
-    //   title: 'Bought a phone',
-    //   amount: 900,
-    //   positive: false,
-    // },
-  ]);
+  const [transactions, setTransactions] = useState([]);
 
   // Calculate income and based on transactions
   const calculations = {

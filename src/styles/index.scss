@@ -31,6 +31,7 @@ body {
     height: 100%;
     gap: 1rem;
     .App {
+      max-width: 48rem;
       min-width: 28rem;
       padding: 1rem;
       height: 100%;
@@ -130,10 +131,15 @@ body {
           max-height: 18rem;
 
           .transaction {
+            display: flex;
             background: $light-bg-color;
             padding: 0.4rem;
             box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px,
               rgba(0, 0, 0, 0.24) 0px 1px 2px;
+
+            .title {
+              flex: 1;
+            }
           }
         }
       }
