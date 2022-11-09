@@ -5,21 +5,21 @@ import Main from './components/Main';
 
 function App() {
   const [transactions, setTransactions] = useState([
-    {
-      id: 1,
-      title: 'Got salary',
-      amount: 2000,
-      positive: true,
-    },
-    {
-      id: 2,
-      title: 'Bought a phone',
-      amount: 900,
-      positive: false,
-    },
+    // {
+    //   id: 1,
+    //   title: 'Got salary',
+    //   amount: 2000,
+    //   positive: true,
+    // },
+    // {
+    //   id: 2,
+    //   title: 'Bought a phone',
+    //   amount: 900,
+    //   positive: false,
+    // },
   ]);
 
-  // Calculate income, expence and balance based on transactions
+  // Calculate income and based on transactions
   const calculations = {
     income: transactions.reduce(
       (acc, tr) => (tr.positive ? acc + tr.amount : acc),
@@ -30,8 +30,6 @@ function App() {
       0
     ),
   };
-
-  console.log(calculations);
 
   function onAddTransaction(newTransaction) {
     newTransaction.id = transactions.length + 1;
