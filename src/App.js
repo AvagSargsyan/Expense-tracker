@@ -1,28 +1,53 @@
+import { useState } from 'react';
 import AddTransaction from './components/AddTransaction';
 import History from './components/History';
 import Main from './components/Main';
 
 function App() {
-  const transactions = [
+  const [transactions, setTransactions] = useState([
     {
       id: 1,
-      title: 'Bought a phone',
-      amount: 700,
-      positive: false,
-    },
-    {
-      id: 2,
       title: 'Got salary',
       amount: 2000,
       positive: true,
     },
-  ];
+    {
+      id: 2,
+      title: 'Bought a phone',
+      amount: 900,
+      positive: false,
+    },
+  ]);
+
+  // Calculate income, expence and balance based on transactions
+  const calculations = {
+    income: transactions.reduce(
+      (acc, tr) => (tr.positive ? acc + tr.amount : acc),
+      0
+    ),
+    expence: transactions.reduce(
+      (acc, tr) => (!tr.positive ? acc + tr.amount : acc),
+      0
+    ),
+  };
+
+  console.log(calculations);
+
+  function onAddTransaction(newTransaction) {
+    newTransaction.id = transactions.length + 1;
+    setTransactions((prevTransactions) => {
+      return [newTransaction, ...prevTransactions];
+    });
+  }
 
   return (
     <div className="App">
-      <Main transactions={transactions} />
+      <Main calculations={calculations} />
       <History transactions={transactions} />
-      <AddTransaction />
+      <AddTransaction
+        onAdd={onAddTransaction}
+        balance={calculations.income - calculations.expence}
+      />
     </div>
   );
 }

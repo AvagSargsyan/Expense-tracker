@@ -5,5 +5,10 @@ export default function History({ transactions }) {
     <Transaction transaction={transaction} key={transaction.id} />
   ));
 
-  return <div className="history">{list}</div>;
+  return (
+    <div className="history">
+      <h2>History</h2>
+      <div className="history-items">{list}</div>
+    </div>
+  );
 }
