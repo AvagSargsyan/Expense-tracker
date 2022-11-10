@@ -1,3 +1,20 @@
+# Expense Tracker app
+
+A simple expense tracker app that allows you to keep track of your expenses.
+
+![Expense app](./src/screenshots/screenshot.png)
+
+## Built with
+
+- HTML
+- SASS
+- JavaScript
+- React JS
+
+## Authors
+
+This project is designed and created by [me](https://github.com/AvagSargsyan).
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
