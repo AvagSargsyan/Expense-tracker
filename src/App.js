@@ -1,10 +1,33 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AddTransaction from './components/AddTransaction';
 import History from './components/History';
 import Main from './components/Main';
+import { db } from './firebase';
+import {
+  query,
+  collection,
+  onSnapshot,
+  addDoc,
+  deleteDoc,
+  doc
+} from 'firebase/firestore';
 
 function App() {
   const [transactions, setTransactions] = useState([]);
+
+  // Read transactions from firebase
+  useEffect(() => {
+    const q = query(collection(db, 'transactions'));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let transactionsArr = [];
+      querySnapshot.forEach((doc) => {
+        transactionsArr.push({ ...doc.data(), id: doc.id });
+        setTransactions(transactionsArr);
+      })
+    })
+
+    return () => unsubscribe();
+  }, []);
 
   // Current values of income and expense based on transactions
   const currentValues = {
@@ -18,17 +41,14 @@ function App() {
     ),
   };
 
-  function onAddTransaction(newTransaction) {
-    newTransaction.id = transactions.length + 1;
-    setTransactions((prevTransactions) => {
-      return [newTransaction, ...prevTransactions];
-    });
+  // Create new transaction
+  const onAddTransaction = async (newTransaction) => {
+    await addDoc(collection(db, 'transactions'), newTransaction)
   }
 
-  function onDeleteTransaction(id) {
-    setTransactions((prevTransactions) =>
-      prevTransactions.filter((tr) => tr.id !== id)
-    );
+  // Delete a transaction
+  const onDeleteTransaction = async (id) => {
+    await deleteDoc(doc(db, 'transactions', id));
   }
 
   return (
