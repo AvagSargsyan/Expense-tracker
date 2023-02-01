@@ -6,10 +6,9 @@ A simple expense tracker app that allows you to keep track of your expenses.
 
 ## Built with
 
-- HTML
-- SASS
-- JavaScript
-- React JS
+- [React](https://reactjs.org/)
+- [SASS](https://sass-lang.com/)
+- [Firebase](https://firebase.google.com/)
 
 ## Authors
 
