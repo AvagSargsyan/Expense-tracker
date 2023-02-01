@@ -1,10 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AddTransaction from './components/AddTransaction';
 import History from './components/History';
 import Main from './components/Main';
+import { db } from './firebase';
+import { query, collection, onSnapshot } from 'firebase/firestore';
 
 function App() {
   const [transactions, setTransactions] = useState([]);
+
+  // Read transactions from firebase
+  useEffect(() => {
+    const q = query(collection(db, 'transactions'));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let transactionsArr = [];
+      querySnapshot.forEach((doc) => {
+        transactionsArr.push({ ...doc.data(), id: doc.id });
+        setTransactions(transactionsArr);
+      })
+    })
+
+    return () => unsubscribe();
+  }, [])
 
   // Current values of income and expense based on transactions
   const currentValues = {
