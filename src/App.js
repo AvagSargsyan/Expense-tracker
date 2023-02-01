@@ -3,8 +3,14 @@ import AddTransaction from './components/AddTransaction';
 import History from './components/History';
 import Main from './components/Main';
 import { db } from './firebase';
-import { query, collection, onSnapshot, addDoc } from 'firebase/firestore';
-import { async } from '@firebase/util';
+import {
+  query,
+  collection,
+  onSnapshot,
+  addDoc,
+  deleteDoc,
+  doc
+} from 'firebase/firestore';
 
 function App() {
   const [transactions, setTransactions] = useState([]);
@@ -21,7 +27,7 @@ function App() {
     })
 
     return () => unsubscribe();
-  }, [])
+  }, []);
 
   // Current values of income and expense based on transactions
   const currentValues = {
@@ -40,10 +46,9 @@ function App() {
     await addDoc(collection(db, 'transactions'), newTransaction)
   }
 
-  function onDeleteTransaction(id) {
-    setTransactions((prevTransactions) =>
-      prevTransactions.filter((tr) => tr.id !== id)
-    );
+  // Delete a transaction
+  const onDeleteTransaction = async (id) => {
+    await deleteDoc(doc(db, 'transactions', id));
   }
 
   return (
