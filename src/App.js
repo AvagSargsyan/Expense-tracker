@@ -3,7 +3,8 @@ import AddTransaction from './components/AddTransaction';
 import History from './components/History';
 import Main from './components/Main';
 import { db } from './firebase';
-import { query, collection, onSnapshot } from 'firebase/firestore';
+import { query, collection, onSnapshot, addDoc } from 'firebase/firestore';
+import { async } from '@firebase/util';
 
 function App() {
   const [transactions, setTransactions] = useState([]);
@@ -34,11 +35,9 @@ function App() {
     ),
   };
 
-  function onAddTransaction(newTransaction) {
-    newTransaction.id = transactions.length + 1;
-    setTransactions((prevTransactions) => {
-      return [newTransaction, ...prevTransactions];
-    });
+  // Create new transaction
+  const onAddTransaction = async (newTransaction) => {
+    await addDoc(collection(db, 'transactions'), newTransaction)
   }
 
   function onDeleteTransaction(id) {
